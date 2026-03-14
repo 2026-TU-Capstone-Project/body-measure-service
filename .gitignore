@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+
+# 가상환경
+venv/
+env/
+.env
+
+# 모델 가중치 (대용량)
+*.h5
+*.ckpt
+*.pb
+
+# 로그 / 학습 결과
+logs/
+*.log
+
+# macOS
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# 데이터셋 (로컬에만 보관)
+data/
+datasets/
+
+# IDE
+.vscode/
+.idea/
