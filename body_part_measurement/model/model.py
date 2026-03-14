@@ -2,26 +2,12 @@ import tensorflow as tf
 from model.blazepose import BlazePose
 from model.mobilenet_v3 import MobileNetV3
 from model.measurement_attention_mlp import get_measurement_attention_mlp
-from model.dual_blazepose import DualBlazePose
 
 def get_model(config):
     input_shape = config["input_shape"]
     batch_size  = config["batch_size"]
     type_backbone = config["type_backbone"]
     is_with_seg   = config.get("is_with_seg", False)
-
-    # ── dual_blazepose: 정면 + 측면 + scalars(키/BMI/허리) ───────────
-    if type_backbone == "dual_blazepose":
-        dual = DualBlazePose(
-            batch_size=batch_size,
-            input_shape=input_shape,
-            num_keypoints=31,
-            num_seg_channels=10,
-        )
-        model_type = "REGRESSION_AND_SEGMENTATION" if is_with_seg else "REGRESSION"
-        return dual.build_model(model_type=model_type)
-
-    # ── 기존 단일뷰 모델들 ────────────────────────────────────────────
     type_attention     = config.get("type_attention", "none")
     num_category_bmi    = config.get("num_category_bmi", 10)
     num_category_height = config.get("num_category_height", 10)
